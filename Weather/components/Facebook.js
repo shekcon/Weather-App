@@ -11,8 +11,8 @@ export default class Facebook extends Component {
         avatar: null
       };
     }
+
     getInfoUser = token => {
-      console.log('https://graph.facebook.com/v2.5/me?fields=name&access_token=' + token);
       fetch('https://graph.facebook.com/v2.5/me?fields=name&access_token=' + token)
       .then((response) => response.json())
       .then((json) => {
@@ -29,7 +29,6 @@ export default class Facebook extends Component {
     }
   
     getInfoAvatar = (id) => {
-      console.log("http://graph.facebook.com/" + id + "/picture?type=square&redirect=false");
       fetch ("http://graph.facebook.com/" + id + "/picture?type=square&redirect=false")
       .then((response) => response.json())
       .then((json) => {
@@ -71,7 +70,7 @@ export default class Facebook extends Component {
                 }
               }
             }
-            onLogoutFinished={() => console.log("logout.")}/>
+            onLogoutFinished={() => this.setState({avatar: null})}/>
         </View>
       );
     }

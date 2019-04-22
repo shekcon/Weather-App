@@ -14,7 +14,7 @@ export default class Weather extends Component {
       super(props);
       this.state = {
         city: '',
-        cities: require('./listofcities.json'),
+        cities: require('../listofcities.json'),
         weather: null,
       };
     }
@@ -29,7 +29,7 @@ export default class Weather extends Component {
       else if (match.length == 0)
       {
         var suggest = this.state.cities.filter(ct =>
-          ct.name.toLowerCase().startsWith(props.toLowerCase())
+          ct.name.toLowerCase().match(props.toLowerCase())
         );
         if (suggest.length > 0 && this.state.city !== suggest[0].name) {
           this.updateState(suggest[0]);
@@ -80,7 +80,7 @@ export default class Weather extends Component {
             { this.state.weather !== null &&
                 <ImageBackground source={require('../img/background.png')}  style={styles.containerInfo}>
                 <View style={styles.contentTop}>
-                    <Text style={styles.contentWeatherText}>City: {this.state.city}</Text>
+                    <Text style={styles.contentText}>City: {this.state.city}</Text>
                 </View>
                 <View style={styles.contentBottom}>
                     <Text style={styles.contentText}>Temperature: {(this.state.weather.temp - 273.15).toFixed(2)} C</Text>
